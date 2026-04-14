@@ -28,12 +28,13 @@ The model is integrated into a **Streamlit web application** where users can inp
 
 ```
 house-price-prediction/
-│── data.csv
-│── house_price.py
 │── app.py
-│── app_screenshot.png
-│── graph.png
+│── house_price.py
+│── data.csv
+│── requirements.txt  
 │── README.md
+│── graph.png
+│── app_screenshot.png
 ```
 
 ---
