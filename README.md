@@ -1,11 +1,9 @@
 # 🏠 House Price Prediction with Model Comparison
 
-## 📌 Overview
-This project predicts house prices using Machine Learning models and compares their performance.
-
-Initially, Linear Regression was used. Later, the project was upgraded by adding Random Forest and implementing a full comparison system with visualization.
+An interactive Machine Learning web application that predicts house prices and compares model performance using Linear Regression and Random Forest.
 
 ---
+
 
 ## 🚀 Features
 
@@ -34,6 +32,21 @@ Initially, Linear Regression was used. Later, the project was upgraded by adding
 - Uses multiple decision trees
 
 ---
+## 📊 Dataset
+
+* Based on a multi-feature housing dataset (California Housing style)
+* Contains features such as:
+
+  * Median Income (MedInc)
+  * House Age (HouseAge)
+  * Average Rooms (AveRooms)
+  * Average Bedrooms (AveBedrms)
+  * Population
+  * Average Occupancy (AveOccup)
+  * Latitude & Longitude
+* Target variable: **House Price**
+
+---
 
 ## 📊 Evaluation Metrics
 
@@ -45,7 +58,7 @@ Initially, Linear Regression was used. Later, the project was upgraded by adding
 ## 📸 Application Screenshots
 
 ### 🔹 Main Interface
-![UI](assets/ui.png)
+![UI](assets/app_ui.png)
 
 ### 🔹 Prediction Output
 ![Prediction](assets/prediction.png)
@@ -54,7 +67,8 @@ Initially, Linear Regression was used. Later, the project was upgraded by adding
 ![Comparison](assets/comparison.png)
 
 ### 🔹 Data Visualization (Area vs Price)
-![Area vs Price](assets/area_vs_price.png)
+![Features vs Price](assets/features_vs_price.png)
+![Features](assets/features.png)
 
 ---
 
@@ -77,29 +91,37 @@ house-price-prediction/
 │   └── utils.py
 │
 ├── assets/
-│   ├── ui.png
+│   ├── app_ui.png
 │   ├── prediction.png
 │   ├── comparison.png
-│   └── area_vs_price.png
+│   └── features_vs_price.png and features.png
 │
 ├── app.py
 ├── requirements.txt
 └── README.md
 ```
-
 ---
+## ⚙️ Setup & Run
 
-## ⚙️ How to Run the Project
+### Install dependencies
 
-### 1️⃣ Install Dependencies
+```
+pip install -r requirements.txt
+```
 
----
+### Train models
 
-### 2️⃣ Train Models
+```
+cd src
+python train_model.py
+```
 
----
+### Run app
 
-### 3️⃣ Run the Application
+```
+cd ..
+streamlit run app.py
+```
 
 ---
 
@@ -113,13 +135,13 @@ house-price-prediction/
 
 ---
 
+
 ## 🔮 Future Improvements
 
-- Add more features to dataset
-- Use advanced models (XGBoost)
-- Hyperparameter tuning
-- Deploy application online (Streamlit Cloud / Render)
-
+* Add user input sliders for all features
+* Hyperparameter tuning
+* Feature importance visualization
+* Deploy using cloud platforms
 ---
 
 
