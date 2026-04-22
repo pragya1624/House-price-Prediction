@@ -59,30 +59,33 @@ Initially, Linear Regression was used. Later, the project was upgraded by adding
 ---
 
 ## 📂 Project Structure
+
+```
 house-price-prediction/
 │
 ├── data/
-│ └── data.csv
+│   └── data.csv
 │
 ├── models/
-│ ├── linear.pkl
-│ └── rf.pkl
+│   ├── linear.pkl
+│   └── rf.pkl
 │
 ├── src/
-│ ├── train_model.py
-│ ├── predict.py
-│ ├── evaluate.py
-│ └── utils.py
+│   ├── train_model.py
+│   ├── predict.py
+│   ├── evaluate.py
+│   └── utils.py
 │
 ├── assets/
-│ ├── ui.png
-│ ├── prediction.png
-│ ├── comparison.png
-│ └── area_vs_price.png
+│   ├── ui.png
+│   ├── prediction.png
+│   ├── comparison.png
+│   └── area_vs_price.png
 │
 ├── app.py
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
