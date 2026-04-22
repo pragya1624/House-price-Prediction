@@ -6,7 +6,11 @@ def train_models():
     from sklearn.ensemble import RandomForestRegressor
 
 # Load dataset
-df = pd.read_csv("../data/data.csv")
+import os
+
+# Get the directory where this script lives
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+df = pd.read_csv(os.path.join(BASE_DIR, "../data/data.csv"))  
 
 # Features and target
 X = df.drop("price", axis=1)
