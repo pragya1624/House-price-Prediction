@@ -1,3 +1,2 @@
-models/*.pkl
-__pycache__/
-*.pyc
+models/rf.pkl
+models/linear.pkl
