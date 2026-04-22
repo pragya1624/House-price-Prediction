@@ -2,107 +2,91 @@ import streamlit as st
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error
+import numpy as np
 
-from src.predict import predict_price
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+st.set_page_config(page_title="House Price Prediction", layout="centered")
 
-# -------------------------------
-# Title
-# -------------------------------
-st.title("🏠 House Price Prediction")
-st.write("Compare Linear Regression and Random Forest")
+st.title("🏠 House Price Prediction App")
 
-# -------------------------------
-# User Input
-# -------------------------------
-area = st.number_input("Enter Area")
-bedrooms = st.number_input("Enter Bedrooms")
-
-# Model selection
-model = st.selectbox(
-    "Select Model",
-    ["Linear Regression", "Random Forest"]
-)
-
-# -------------------------------
-# Prediction
-# -------------------------------
-if st.button("Predict Price"):
-    features = [area, bedrooms]
-    result = predict_price(model, features)
-
-    st.success(f"💰 Predicted Price: {result}")
-
-# -------------------------------
-# Data Visualization (Area vs Price)
-# -------------------------------
-st.subheader("📊 House Price vs Area")
-
+# Load dataset
 df = pd.read_csv("data/data.csv")
 
-fig1, ax1 = plt.subplots()
-ax1.scatter(df['area'], df['price'])
+# Split features and target
+X = df.drop("price", axis=1)
+y = df["price"]
 
-ax1.set_xlabel("Area")
-ax1.set_ylabel("Price")
-ax1.set_title("House Price vs Area")
+# Load models
+linear_model = joblib.load("models/linear.pkl")
+rf_model = joblib.load("models/rf.pkl")
 
-st.pyplot(fig1)
+# -------------------------
+# MODEL SELECTION
+# -------------------------
+model_choice = st.selectbox("Select Model", ["Linear Regression", "Random Forest"])
 
-# -------------------------------
-# Model Comparison
-# -------------------------------
+# -------------------------
+# PREDICTION (using sample input)
+# -------------------------
+st.subheader("🔮 Predict House Price")
+
+if st.button("Predict Price"):
+    # Use first row as sample input (temporary solution)
+    features = X.iloc[0].values.reshape(1, -1)
+
+    if model_choice == "Linear Regression":
+        prediction = linear_model.predict(features)
+    else:
+        prediction = rf_model.predict(features)
+
+    st.success(f"💰 Predicted Price: {prediction[0]:.2f}")
+
+# -------------------------
+# MODEL COMPARISON
+# -------------------------
+st.subheader("📊 Model Performance (RMSE Comparison)")
+
 if st.button("Compare Models"):
+    y_pred_lr = linear_model.predict(X)
+    y_pred_rf = rf_model.predict(X)
 
-    X = df[['area', 'bedrooms']]
-    y = df['price']
+    rmse_lr = np.sqrt(mean_squared_error(y, y_pred_lr))
+    rmse_rf = np.sqrt(mean_squared_error(y, y_pred_rf))
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
-
-    # Load models
-    lr = joblib.load("models/linear.pkl")
-    rf = joblib.load("models/rf.pkl")
-
-    def evaluate(model):
-        pred = model.predict(X_test)
-        mae = mean_absolute_error(y_test, pred)
-        rmse = mean_squared_error(y_test, pred) ** 0.5
-        r2 = r2_score(y_test, pred)
-        return mae, rmse, r2
-
-    # Evaluate both models
-    lr_mae, lr_rmse, lr_r2 = evaluate(lr)
-    rf_mae, rf_rmse, rf_r2 = evaluate(rf)
-
-    # Create dataframe
-    data = {
+    df_results = pd.DataFrame({
         "Model": ["Linear Regression", "Random Forest"],
-        "RMSE": [lr_rmse, rf_rmse],
-        "R2 Score": [lr_r2, rf_r2]
-    }
+        "RMSE": [rmse_lr, rmse_rf]
+    })
 
-    df_results = pd.DataFrame(data)
+    # Show best model
+    best_model = df_results.loc[df_results["RMSE"].idxmin()]
+
+    st.success(f"🏆 Best Model: {best_model['Model']}")
 
     # Show table
-    st.subheader("📊 Model Comparison")
-    st.dataframe(df_results)
+    st.write(df_results)
 
-    # Best model
-    best_model = df_results.loc[df_results["RMSE"].idxmin()]["Model"]
-    st.success(f"🏆 Best Model: {best_model}")
+    # Plot comparison
+    fig, ax = plt.subplots()
+    ax.bar(df_results["Model"], df_results["RMSE"])
+    ax.set_ylabel("RMSE")
+    ax.set_title("Model Comparison")
+    st.pyplot(fig)
 
-    # -------------------------------
-    # Graph (RMSE Comparison)
-    # -------------------------------
-    st.subheader("📈 Model Performance (RMSE Comparison)")
+# -------------------------
+# DATA VISUALIZATION
+# -------------------------
+st.subheader("📈 Data Visualization")
 
-    fig2, ax2 = plt.subplots()
-    ax2.bar(df_results["Model"], df_results["RMSE"])
+feature_for_graph = st.selectbox(
+    "Select Feature for Graph",
+    X.columns
+)
 
-    ax2.set_ylabel("RMSE")
-    ax2.set_title("Model Comparison")
+fig2, ax2 = plt.subplots()
+ax2.scatter(df[feature_for_graph], df["price"])
+ax2.set_xlabel(feature_for_graph)
+ax2.set_ylabel("Price")
+ax2.set_title(f"{feature_for_graph} vs Price")
 
-    st.pyplot(fig2)
+st.pyplot(fig2)

@@ -9,8 +9,8 @@ from sklearn.ensemble import RandomForestRegressor
 df = pd.read_csv("../data/data.csv")
 
 # Features and target
-X = df[['area', 'bedrooms']]
-y = df['price']
+X = df.drop("price", axis=1)
+y = df["price"]
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(
