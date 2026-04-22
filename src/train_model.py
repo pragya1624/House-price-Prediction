@@ -1,9 +1,9 @@
-import pandas as pd
-import joblib
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
+def train_models():
+    import pandas as pd
+    import joblib
+    from sklearn.model_selection import train_test_split
+    from sklearn.linear_model import LinearRegression
+    from sklearn.ensemble import RandomForestRegressor
 
 # Load dataset
 df = pd.read_csv("../data/data.csv")

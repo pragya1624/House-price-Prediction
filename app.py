@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error
 import numpy as np
 
+import os
+from src.train_model import train_models
+
 st.set_page_config(page_title="House Price Prediction", layout="centered")
 
 st.title("🏠 House Price Prediction App")
@@ -16,6 +19,11 @@ df = pd.read_csv("data/data.csv")
 X = df.drop("price", axis=1)
 y = df["price"]
 
+# Auto-train models if not present
+if not os.path.exists("models/linear.pkl") or not os.path.exists("models/rf.pkl"):
+    st.warning("⚙️ Models not found. Training models...")
+    train_models()
+    st.success("✅ Models trained successfully!")
 # Load models
 linear_model = joblib.load("models/linear.pkl")
 rf_model = joblib.load("models/rf.pkl")
