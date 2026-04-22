@@ -1,101 +1,123 @@
-# 🏠 House Price Prediction Web App
+# 🏠 House Price Prediction with Model Comparison
 
-## 📌 Problem Statement
+## 📌 Overview
+This project predicts house prices using Machine Learning models and compares their performance.
 
-Predict house prices based on area and number of bedrooms using Machine Learning.
-
----
-
-## 🚀 Project Overview
-
-This is an end-to-end Machine Learning project that uses **Linear Regression** to predict house prices.
-The model is integrated into a **Streamlit web application** where users can input values and get real-time predictions.
+Initially, Linear Regression was used. Later, the project was upgraded by adding Random Forest and implementing a full comparison system with visualization.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Features
 
-* Python
-* Pandas
-* NumPy
-* Matplotlib
-* Scikit-learn
-* Streamlit
+- 🔹 Predict house prices using input features
+- 🔹 Compare multiple models:
+  - Linear Regression
+  - Random Forest
+- 🔹 Evaluate models using:
+  - RMSE (Root Mean Squared Error)
+  - R² Score
+- 🔹 Interactive web app using Streamlit
+- 🔹 Data visualization (Area vs Price)
+- 🔹 Model comparison table and graph
+- 🔹 Best model selection
+
+---
+
+## 🧠 Models Used
+
+### 1. Linear Regression
+- Simple and fast
+- Works well for linear relationships
+
+### 2. Random Forest
+- Handles complex and non-linear data
+- Uses multiple decision trees
+
+---
+
+## 📊 Evaluation Metrics
+
+- **RMSE (Root Mean Squared Error)** → Lower is better  
+- **R² Score** → Higher is better  
+
+---
+
+## 📸 Application Screenshots
+
+### 🔹 Main Interface
+![UI](assets/ui.png)
+
+### 🔹 Prediction Output
+![Prediction](assets/prediction.png)
+
+### 🔹 Model Comparison
+![Comparison](assets/comparison.png)
+
+### 🔹 Data Visualization (Area vs Price)
+![Area vs Price](assets/area_vs_price.png)
 
 ---
 
 ## 📂 Project Structure
-
-```
 house-price-prediction/
-│── app.py
-│── house_price.py
-│── data.csv
-│── requirements.txt  
-│── README.md
-│── graph.png
-│── app_screenshot.png
-```
+│
+├── data/
+│ └── data.csv
+│
+├── models/
+│ ├── linear.pkl
+│ └── rf.pkl
+│
+├── src/
+│ ├── train_model.py
+│ ├── predict.py
+│ ├── evaluate.py
+│ └── utils.py
+│
+├── assets/
+│ ├── ui.png
+│ ├── prediction.png
+│ ├── comparison.png
+│ └── area_vs_price.png
+│
+├── app.py
+├── requirements.txt
+└── README.md
 
 ---
 
-## ⚙️ How to Run
+## ⚙️ How to Run the Project
 
-### 1. Install Dependencies
-
-```
-py -m pip install pandas numpy matplotlib scikit-learn streamlit
-```
-
-### 2. Run the App
-
-```
-py -m streamlit run app.py
-```
+### 1️⃣ Install Dependencies
 
 ---
 
-## 🌐 Features
-
-* Predict house price instantly
-* Simple and interactive UI
-* Real-time user input
-* Data visualization
+### 2️⃣ Train Models
 
 ---
 
-## 📸 Demo
-
-<img src="app_screenshot.png" width="600">
+### 3️⃣ Run the Application
 
 ---
 
-## 📊 Visualization
+## 🎯 Results & Insights
 
-<img src="graph.png" width="600">
-
----
-
-## 📈 Output Example
-
-Estimated Price: ₹11,33,333.33
-
----
-
-## 🎯 Learning Outcomes
-
-* Regression model implementation
-* Data preprocessing
-* Model training and prediction
-* Building ML web apps using Streamlit
+- Model performance depends on the dataset
+- Linear Regression performs better on linear data
+- Random Forest performs better on complex/non-linear data
+- RMSE is used as the primary metric for comparison
+- Visualization helps in understanding both data and model performance
 
 ---
 
 ## 🔮 Future Improvements
 
-* Add more features (location, bathrooms)
-* Use larger dataset
-* Deploy app online
+- Add more features to dataset
+- Use advanced models (XGBoost)
+- Hyperparameter tuning
+- Deploy application online (Streamlit Cloud / Render)
 
 ---
+
+
 
