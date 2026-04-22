@@ -67,7 +67,7 @@ An interactive Machine Learning web application that predicts house prices and c
 ![Comparison](assets/comparison.png)
 
 ### 🔹 Data Visualization (Area vs Price)
-![Features vs Price](assets/features_vs_price.png)
+![Features vs Price](assets/feature_vs_price.png)
 ![Features](assets/features.png)
 
 ---
